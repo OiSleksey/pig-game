@@ -9,28 +9,34 @@
     <title>Pig game</title>
   </head>
   <body>
-    <main>
-      <section class="player player__0 player_active">
-        <h2 class="name" id="name__0">Player 1</h2>
-        <p class="score" id="score__0">47</p>
-        <div class="current">
-          <p class="current__label">Current point</p>
-          <p class="current__score" id="current__0">0</p>
-        </div>
-      </section>
-      <section class="player player__1">
-        <h2 class="name" id="name__1">Player 2</h2>
-        <p class="score" id="score__1">31</p>
-        <div class="current">
-          <p class="current__label">Current point</p>
-          <p class="current__score" id="current__1">0</p>
-        </div>
-      </section>
+    <div class="wrapper">
+      <main class="pig pig__head">
+        <section class="player player__0 player_active">
+          <h2 class="name" id="name__0">Player 1</h2>
+          <p class="score" id="score__0">47</p>
+          <div class="current">
+            <p class="current__label">Current point</p>
+            <p class="current__score" id="current__0">0</p>
+          </div>
+        </section>
+        <section class="player player__1">
+          <h2 class="name" id="name__1">Player 2</h2>
+          <p class="score" id="score__1">31</p>
+          <div class="current">
+            <p class="current__label">Current point</p>
+            <p class="current__score" id="current__1">0</p>
+          </div>
+        </section>
 
-      <img src="img/nose.png" alt="Playing dice" class="dice" />
-      <button class="btn btn__new">New game</button>
-      <button class="btn btn__roll">Roll dice</button>
-      <button class="btn btn__hold">Leave</button>
-    </main>
+        <img src="img/nose.png" alt="Playing dice" class="dice" />
+        <button class="btn btn__new">New game</button>
+        <button class="btn btn__roll">Roll dice</button>
+        <button class="btn btn__hold">Leave</button>
+      </main>
+      <div class="pig__ear-left"></div>
+      <div class="pig__ear-left2"></div>
+      <div class="pig__ear-right"></div>
+      <div class="pig__ear-right2"></div>
+    </div>
   </body>
 </html>

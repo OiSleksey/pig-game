@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap')
+
+*
+    margin: 0
+    padding: 0
+    box-sizing: border-box
+
+html
+    font-size: 60%
+    color: red
+
+body
+    font-family: 'Play', sans-serif
+    font-weight: 400
+    height: 100vh
+    color: #000
+    background-image: linear-gradient(72.01deg, rgba(243, 74, 74, 0.85) 0%, rgba(247, 105, 105, 0.51) 50.02%, rgba(243, 74, 74, 0.69) 97.4%)
+    display: flex
+    align-items: center
+    justify-content: center
+    position: relative
+
+.wrapper
+    position: absolute
+    width: 100rem
+    height: 60rem
+
+main
+    width: 100rem
+    height: 60rem
+    background: linear-gradient(145deg, #ffe2c9, #d9bea9)
+    box-shadow: 20px 20px 60px #9a8778, -20px -20px 60px #ffffff
+
+    overflow: hidden
+    display: flex
+
+.pig
+    &__head
+        clip-path: polygon(20% 0, 80% 0, 100% 40%, 90% 80%, 50% 100%, 10% 80%, 0 40%)
+        position: absolute
+    &__ear-left
+        background: linear-gradient(106.51deg, #EF7A96 0%, rgba(239, 122, 150, 0.24) 80.54%)
+        height: 16rem
+        width: 15rem
+        top: 0rem
+        left: -1.6rem
+        clip-path: polygon(0 0, 100% 30%, 69% 100%)
+        transform: rotate(17deg)
+        position: absolute
+
+    &__ear-left2
+        background: radial-gradient(43.1% 132.71% at 50% 45%, #ED4C7B 0%, rgba(237, 76, 123, 0.24) 100%)
+        height: 17rem
+        width: 8.5rem
+        top: -1.1rem
+        left: -0.5rem
+        clip-path: polygon(0 0, 100% 100%, 35% 85%)
+        position: absolute
+        transform: rotate(11deg)
+
+    &__ear-right
+        background: linear-gradient(245.18deg, #EF7A96 0%, rgba(239, 122, 150, 0.24) 75.98%)
+        height: 16rem
+        width: 15rem
+        clip-path: polygon(0 0, 99% 35%, 64% 100%)
+        position: absolute
+        right: -1.3rem
+        top: 0rem
+        transform: scaleX(-1) rotate(13deg)
+
+    &__ear-right2
+        background: radial-gradient(43.1% 132.71% at 50% 45%, #ED4C7B 0%, rgba(237, 76, 123, 0.24) 100%)
+        height: 17rem
+        width: 8.5rem
+        clip-path: polygon(0 2%, 100% 100%, 35% 85%)
+        position: absolute
+        right: -0.6rem
+        top: -1.1rem
+        transform: scaleX(-1) rotate(9deg)
+
+.player
+    flex: 50%
+    padding: 9rem
+    display: flex
+    flex-direction: column
+    align-items: center
+    transition: all 0.75s
+
+.name
+    position: relative
+    font-size: 4rem
+    text-transform: uppercase
+    letter-spacing: 1px
+    word-spacing: 2px
+    font-weight: 300
+    margin-bottom: 1rem
+    filter: drop-shadow(1px 1px 0.1px rgb(63, 63, 63))
+    color: #262f34
+
+.score
+    font-size: 8rem
+    font-weight: 300
+    color: #615049
+    margin-bottom: 8rem
+    filter: drop-shadow(1px 1px 0.1px rgb(63, 63, 63))
+
+.player_active
+    background-color: rgba(255,255,255,0.6)
+    & .name
+        font-weight: 700
+    & .score
+        font-weight: 400
+    & .current
+        opacity: 1
+
+.current
+    clip-path: ellipse(50% 50% at 50% 50%)
+    background: linear-gradient(145deg, #615049, #615049)
+    box-shadow: 7px 7px 18px #878787, -7px -7px 18px #878787
+    opacity: 0.8
+    border-radius: 9px
+    color: #fff
+    width: 65%
+    padding: 2rem
+    text-align: center
+    transition: all 0.75s
+
+    &__label
+        text-transform: uppercase
+        margin-bottom: 1rem
+        font-size: 1.7rem
+        color: #eee
+
+    &__score
+        font-size: 3.5rem
+
+.btn
+    position: absolute
+    left: 50%
+    transform: translateX(-50%)
+    color: #444
+    background: none
+    border: none
+    font-family: inherit
+    font-size: 1.8rem
+    text-transform: uppercase
+    cursor: pointer
+    font-weight: 400
+    line-height: 3rem
+    transition: all 0.2s
+    background: linear-gradient(180deg, #ffffff, #e6e6e6)
+    box-shadow: 0px 0px 8px #666666, 0px 0px 8px #878787
+    padding: 0.7rem 2.5rem
+    border-radius: 50rem
+
+    &__new
+        top: 3rem
+
+    &__roll
+        top: 42rem
+
+    &__hold
+        top: 50rem
+
+    &:active
+        transform: translate(-50%, 3px)
+
+    &:focus
+        outline: none
+
+.dice
+    position: absolute
+    left: 50%
+    top: 25rem
+    transform: translateX(-50%)
+    height: 12rem
+    filter: drop-shadow(0.1px 0.1px 1px rgb(139, 63, 63))
+
+.player_winner
+    background-color: #b6452c
+
+    & .name
+        font-weight: 700
+        color: #80ab25
+
+@media screen and ( max-width: 1200px )
+
+    html
+        font-size: 44%
+
+@media screen and ( max-width: 991px )
+
+    html
+        font-size: 37%
+
+@media screen and ( max-width: 767px )
+
+    html
+        font-size: 28%
+
+@media screen and ( max-width: 653px )
+
+    html
+        font-size: 28%
+
+@media screen and ( max-width: 575px )
+
+    html
+        font-size: 35%
+
+    .wrapper
+        transform: rotate(90deg)
+
+@media screen and ( max-width: 290px )
+
+    html
+        font-size: 26%
+
+    .wrapper
+        transform: rotate(90deg)
