@@ -1,4 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Play&display=swap')
+$colors-text: #553E4E
+$colors-head: #AA778A
+$colors-head-active: #e98ac0fb
+$colors-body: #FFCFD2
+$colors-btn: linear-gradient(225deg, #ff9999, #e18181)
+$color-current-text: #FFCFD2
+
+$colors-other1: #ffafc5
+$colors-other2: #d593a8
+$colors-other3: #9ebc9e
+$colors-other4: #cfc6b8
+$colors-other5: #D3e536
+$colors-background-victory: #362932
+$colors-text-victory: #FB797A
+$colors-close-victory: #FB797A
+$colors-text-player-label: #fa9d9d
+$color-start-game: #CEfac7
 
 *
     margin: 0
@@ -7,18 +24,19 @@
 
 html
     font-size: 60%
-    color: red
 
 body
     font-family: 'Play', sans-serif
     font-weight: 400
     height: 100vh
-    color: #000
-    background-image: linear-gradient(72.01deg, rgba(243, 74, 74, 0.85) 0%, rgba(247, 105, 105, 0.51) 50.02%, rgba(243, 74, 74, 0.69) 97.4%)
+    // background: linear-gradient(72.01deg, #ffe2c9d3 0%, #ffe2c9d3 50.02%, #d9bea9b2 97.4%)
+    background: url(../img/background11.webp) no-repeat bottom center
+    background-size: cover
     display: flex
     align-items: center
     justify-content: center
     position: relative
+    overflow: hidden
 
 .wrapper
     position: absolute
@@ -28,53 +46,62 @@ body
 main
     width: 100rem
     height: 60rem
-    background: linear-gradient(145deg, #ffe2c9, #d9bea9)
-    box-shadow: 20px 20px 60px #9a8778, -20px -20px 60px #ffffff
+    // 
+    // background: linear-gradient(145deg, #ffe2c9d3, #d9bea9b2)
+
+    // background: linear-gradient(72.01deg, rgba(243, 74, 74, 0.85) 0%, rgba(247, 105, 105, 0.51) 50.02%, rgba(243, 74, 74, 0.69) 97.4%)
+    // background: linear-gradient(145deg,#f34a4ad9, #f7696982)
+
+    // box-shadow: 20px 20px 60px #9a8778, -20px -20px 60px #ffffff
 
     overflow: hidden
     display: flex
 
 .pig
     &__head
-        clip-path: polygon(20% 0, 80% 0, 100% 40%, 90% 80%, 50% 100%, 10% 80%, 0 40%)
+        // clip-path: polygon(20% 0, 80% 0, 100% 40%, 90% 80%, 50% 100%, 10% 80%, 0 40%)
+        clip-path: ellipse(50% 50% at 50% 50%)
         position: absolute
+        background-color: $colors-head
+        // background: linear-gradient(145deg, #f994cd, #d27cad)
+        z-index: 2
     &__ear-left
-        background: linear-gradient(106.51deg, #EF7A96 0%, rgba(239, 122, 150, 0.24) 80.54%)
+        background: linear-gradient(106.51deg, $colors-head-active 0%, rgba(239, 122, 150, 0.24) 80.54%)
         height: 16rem
         width: 15rem
         top: 0rem
-        left: -1.6rem
+        left: 2.4rem
         clip-path: polygon(0 0, 100% 30%, 69% 100%)
         transform: rotate(17deg)
         position: absolute
 
     &__ear-left2
-        background: radial-gradient(43.1% 132.71% at 50% 45%, #ED4C7B 0%, rgba(237, 76, 123, 0.24) 100%)
+        background: radial-gradient(43.1% 132.71% at 50% 45%, $colors-head-active 0%, rgba(237, 76, 123, 0.24) 100%)
         height: 17rem
         width: 8.5rem
         top: -1.1rem
-        left: -0.5rem
+        left: 3.45rem
         clip-path: polygon(0 0, 100% 100%, 35% 85%)
         position: absolute
         transform: rotate(11deg)
 
     &__ear-right
-        background: linear-gradient(245.18deg, #EF7A96 0%, rgba(239, 122, 150, 0.24) 75.98%)
+        background: linear-gradient(245.18deg, $colors-head-active 0%, rgba(239, 122, 150, 0.24) 75.98%)
         height: 16rem
         width: 15rem
         clip-path: polygon(0 0, 99% 35%, 64% 100%)
         position: absolute
-        right: -1.3rem
+        right: 3.7rem
         top: 0rem
         transform: scaleX(-1) rotate(13deg)
 
     &__ear-right2
-        background: radial-gradient(43.1% 132.71% at 50% 45%, #ED4C7B 0%, rgba(237, 76, 123, 0.24) 100%)
+        background: radial-gradient(43.1% 132.71% at 50% 45%, $colors-head-active 0%, rgba(237, 76, 123, 0.24) 100%)
         height: 17rem
         width: 8.5rem
         clip-path: polygon(0 2%, 100% 100%, 35% 85%)
         position: absolute
-        right: -0.6rem
+        right: 4.5rem
         top: -1.1rem
         transform: scaleX(-1) rotate(9deg)
 
@@ -85,6 +112,7 @@ main
     flex-direction: column
     align-items: center
     transition: all 0.75s
+    filter: blur(1.5px)
 
 .name
     position: relative
@@ -94,18 +122,22 @@ main
     word-spacing: 2px
     font-weight: 300
     margin-bottom: 1rem
-    filter: drop-shadow(1px 1px 0.1px rgb(63, 63, 63))
-    color: #262f34
+    filter: drop-shadow(1px 1px 0.1px rgb(56, 15, 37))
+    color: $colors-text
 
 .score
     font-size: 8rem
     font-weight: 300
-    color: #615049
-    margin-bottom: 8rem
-    filter: drop-shadow(1px 1px 0.1px rgb(63, 63, 63))
-
+    color: $colors-text
+    margin-bottom: 12rem
+    filter: drop-shadow(1px 1px 0.1px rgb(58, 11, 42))
+    &_rules
+        margin: 1rem 0
+        display: inline-block
+        color: #ba80b6
 .player_active
-    background-color: rgba(255,255,255,0.6)
+    background-color: $colors-head-active
+    filter: blur(0)
     & .name
         font-weight: 700
     & .score
@@ -115,31 +147,44 @@ main
 
 .current
     clip-path: ellipse(50% 50% at 50% 50%)
-    background: linear-gradient(145deg, #615049, #615049)
+    background: linear-gradient(145deg, $colors-text, $colors-text)
     box-shadow: 7px 7px 18px #878787, -7px -7px 18px #878787
     opacity: 0.8
     border-radius: 9px
-    color: #fff
+    color: $color-current-text
     width: 65%
     padding: 2rem
     text-align: center
     transition: all 0.75s
-
+    margin: 1rem
     &__label
         text-transform: uppercase
         margin-bottom: 1rem
         font-size: 1.7rem
-        color: #eee
-
+        color: $color-current-text
     &__score
         font-size: 3.5rem
+    &_rules
+        width: 30rem
+        margin: 2rem auto 0 auto
+        color: $colors-body
+        line-height: 4rem
 
-.btn
+.dice
     position: absolute
     left: 50%
+    top: 25rem
     transform: translateX(-50%)
-    color: #444
-    background: none
+
+.img-dice__style
+    height: 12rem
+    filter: drop-shadow(0.1px 0.1px 1px rgb(139, 63, 63))
+    &_rules
+        height: 8rem
+        margin: 0rem 1rem
+
+.btn-style
+    color: $colors-text
     border: none
     font-family: inherit
     font-size: 1.8rem
@@ -148,73 +193,418 @@ main
     font-weight: 400
     line-height: 3rem
     transition: all 0.2s
-    background: linear-gradient(180deg, #ffffff, #e6e6e6)
+    background: linear-gradient(225deg, #ffdde1, #e6babd)
     box-shadow: 0px 0px 8px #666666, 0px 0px 8px #878787
     padding: 0.7rem 2.5rem
     border-radius: 50rem
+    margin: 0 1rem
 
+.btn-position
+    position: absolute
+    left: 49%
+    transform: translateX(-50%)
+.btn
     &__new
         top: 3rem
-
     &__roll
         top: 42rem
-
     &__hold
         top: 50rem
-
     &:active
         transform: translate(-50%, 3px)
 
+    // &:hover
+    //     transform: translate(-50%) scale(1.1)
     &:focus
         outline: none
 
-.dice
+//Кнопка из спанов крестик
+.icon-close
+    padding: 0.2rem 0.1rem
     position: absolute
-    left: 50%
-    top: 25rem
-    transform: translateX(-50%)
-    height: 12rem
-    filter: drop-shadow(0.1px 0.1px 1px rgb(139, 63, 63))
+    top: 5%
+    right: 5%
+    border: 0.3rem solid transpared
+    border-radius: 0
+    width: 4rem
+    height: 4rem
+    text-align: center
+    overflow: hidden
+    cursor: pointer
+    & span
+        transition: 1s all
+        width: 100%
+        height: .4rem
+        display: block
+        background: $colors-close-victory
+        margin-bottom: 0.9rem
+        & span:nth-child(1)
+        & span:nth-child(2)
+            opacity: 1
+        & span:nth-child(3)
+            margin-bottom: 0
+    &_active
+        border: 0.3rem solid $colors-close-victory
+        padding: 0.1rem
+        border-radius: 20rem
+        &__span
+        & span:nth-child(1)
+            transform: translateY(1.3rem) rotate(45deg)
+        & span:nth-child(2)
+            opacity: 0
+        & span:nth-child(3)
+            transform: translateY(-1.2rem) rotate(-45deg)
 
-.player_winner
-    background-color: #b6452c
+//Модальное окно стартовое окно
+.start-game
+    padding: 3rem
+    border-radius: 10rem
+    position: absolute
+    top: -4rem
+    left: 0
+    width: 100%
+    opacity: 1
+    height: 110%
+    z-index: 3
+    background: linear-gradient(225deg, #5b4253, #4d3846)
+    box-shadow: -5px 5px 14px #493543, 5px -5px 14px #614759
+    color: $color-start-game
+    font-size: 2rem
+    text-align: center
+    backface-visibility: hidden
+    &_active
+        animation: run 1s ease-in .2s reverse forwards
+    &_close
+        animation: run 1s ease-out .2s normal backwards
 
-    & .name
-        font-weight: 700
-        color: #80ab25
+    &__name
+        color: $colors-body
+        margin-top: 0
+        text-align: center
+        font-size: 7rem
+        &_animation
+            animation: rubberband 1.8s steps(8) 2s infinite alternate backwards
+            backface-visibility: hidden
+            perspective: 1000px
+    &__plane
+        text-align: center
+        font-size: 4rem
+        margin-bottom: 3rem
+    &__form
+        text-align: center
+    &__players-name
+        font-size: 3rem
+        margin-bottom: 3rem
+    &__block-input
+        width: 44%
+        text-align: center
+        position: relative
+        text-align: center
+        display: inline-block
+        margin-right: 8rem
+        margin-bottom: 3rem
+        &:nth-of-type(2)
+            margin-right: 0
+    &__label-player-1
+    &__input-player-1
+    &__label-player-2
+    &__input-player-2
+    &__default-name
+        font-size: 3rem
+        margin-bottom: 3.5rem
+        color: $colors-other5
+    &__btn-start
+        margin-bottom: 3rem
+        &:active
+            transform: translateY(3px)
+        &_animation
+            animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) 4s both
+            transform: translate3d(0, 0, 0)
+            backface-visibility: hidden
+            perspective: 1000px
+    &__btn-rule-game
+        text-align: center
+        margin: 0 3rem
+        &:active
+            transform: translateY(3px)
+
+.date-form__label
+    color: $colors-text-player-label
+    position: absolute
+    transform: tranlateY(-50%)
+    transform-origin: left center
+    top: 20%
+    left: 8rem
+    pointer-events: none
+    transition: .3s ease-in-out
+    background: linear-gradient(337deg, #5b4253, #4d3846)
+    padding: 1rem
+    opacity: .7
+    text-transform: uppercase
+    font-size: 2.8rem
+
+.date-form__input
+    background: linear-gradient(225deg, #5b4253, #4d3846)
+    outline: none
+    width: 70%
+    border: 1rem solid $colors-body
+    border-radius: 3rem
+    padding: 1rem 3.5rem
+    letter-spacing: 0.1rem
+    font-size: 4rem
+    color: $colors-body
+
+.date-form__input:focus + .date-form__label, .date-form__input:not(:placeholder-shown) + .date-form__label
+    top: 0
+    transform: translateY(-50%) scale(.5) translateX(10px)
+    opacity: 1
+
+//модально окно правила игры
+.rule-game
+    padding: 3rem
+    border-radius: 10rem
+    position: absolute
+    top: -4rem
+    left: 150%
+    width: 100%
+    opacity: 1
+    height: 110%
+    z-index: 4
+    background: linear-gradient(225deg, #5b4253, #4d3846)
+    box-shadow: -5px 5px 14px #493543, 5px -5px 14px #614759
+    color: $color-start-game
+    font-size: 2rem
+    text-align: center
+    // backface-visibility: hidden
+    &__title
+        color: $colors-body
+        margin-top: 0
+        font-size: 6rem
+    &__list
+        font-size: 2.5rem
+        list-style: inside
+        text-align: justify
+        & li
+            margin-bottom: 1.5rem
+            line-height: 5.5rem
+    &_active
+        animation: run 1s ease-out .5s normal both
+    &_close
+        animation: run 1s ease-in .2s reverse both
+
+//tab в модальном окне правил игры
+.rule-game
+    &__tabs
+        position: relative
+        height: 45rem
+        width: 100%
+    &__tab
+        float: left
+    &__label
+        cursor: pointer
+        background: #c69
+        font-size: 1.2em
+        border-radius: 7px 7px 0 0
+        padding: .5em 1em
+        margin: 0 1px 0 0
+    &__input
+        position: absolute
+        clip: rect(0,0,0,0)
+        &:checked ~ .rule-game__label
+            background: #c99
+        &:checked ~ .rule-game__label ~ .rule-game__content
+            z-index: 1
+    &__content
+        text-align: justify
+        color: $color-start-game
+        background: #2F3225
+        font-size: 2.5rem
+        border: 1px solid #c69
+        border-radius: 0 5px 5px
+        padding: 2rem 3rem
+        position: absolute
+        width: 100%
+        top: 3rem
+        left: 0
+        right: 0
+        bottom: 0
+    &__winner
+        font-size: 4.8rem
+        text-transform: uppercase
+        color: $colors-other5
+
+//модальное окно победы    
+.victory
+    padding: 3rem
+    border-radius: 10rem
+    position: absolute
+    top: -4rem
+    left: 0
+    width: 100%
+    opacity: 1
+    height: 110%
+    z-index: 3
+    background: linear-gradient(225deg, #5b4253, #4d3846)
+    box-shadow: -5px 5px 14px #493543, 5px -5px 14px #614759
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    align-items: center
+    &__text
+        width: 46%
+    &__left
+        text-align: center
+        width: 20%
+    &__right
+        text-align: center
+        width: 25%
+    &__img-left
+        width: 17rem
+    &__img-right
+        width: 25rem
+    &__title
+        position: relative
+        left: 2%
+        text-transform: uppercase
+        font-size: 8rem
+        letter-spacing: 0.3rem
+        color: $colors-other3
+        &::after
+            content: "victory"
+            position: absolute
+            top: 3.5%
+            left: -0.5%
+            color: $colors-text-victory
+    &__name
+        display: inline-block
+        position: relative
+        left: 12%
+        text-transform: uppercase
+        font-size: 8rem
+        letter-spacing: 0.3rem
+        color: $colors-other5
+
+    &__close
+
+//Help
+.question
+    position: absolute
+    top: -4%
+    right: -10%
+    width: 10rem
+    &__icon
+        width: 10rem
+        cursor: pointer
+        opacity: 0
+        transition: 1.5s all
+
+.hidden
+    opacity: 0
+
+.display_none
+    display: none
+
+// #anaglyphic
+//     display: inline
+//     position: relative
+//     font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif
+//     letter-spacing: -5px
+//     color: #6CF
+//     font-size: 100px
+
+// #anaglyphic:after
+//     content: "ANAGLYPHIC"
+//     position: absolute
+//     top: 5px
+//     left: 5px
+//     color: #F69
+
+@keyframes rubberband
+    0%
+        transform: scaleX(1)
+    40%
+        transform: scaleX(1.12) scaleY(0.75)
+    55%
+        transform: scaleX(0.85) scaleY(1)
+    65%
+        transform: scaleX(1.09) scaleY(0.85)
+    75%
+        transform: scaleX(0.9) scaleY(1)
+    90%
+        transform: scaleX(1.05) scaleY(0.95)
+    100%
+        transform: scaleX(1) scaleY(1)
+
+@keyframes shake
+    10%, 90%
+        transform: translate3d(-1px, 0, 0)
+    20%, 80%
+        transform: translate3d(2px, 0, 0)
+    30%, 50%, 70%
+        transform: translate3d(-4px, 0, 0)
+    40%, 60%
+        transform: translate3d(4px, 0, 0)
+
+@keyframes run
+    0%
+        left: 150%
+        opacity: 0
+        display: none
+        transform: scaleX(0)
+    10%
+        left: 150%
+        opacity: 0.9
+    100%
+        left: 0
+        opacity: 1
+        transform: scaleX(1)
+
+@media screen and ( max-width: 2500px )
+    html
+        font-size: 90%
+
+@media screen and ( max-width: 2200px )
+    html
+        font-size: 80%
+
+@media screen and ( max-width: 1900px )
+    html
+        font-size: 65%
+
+@media screen and ( max-width: 1600px )
+    html
+        font-size: 55%
+
+@media screen and ( max-width: 1400px )
+    html
+        font-size: 50%
 
 @media screen and ( max-width: 1200px )
-
     html
         font-size: 44%
 
 @media screen and ( max-width: 991px )
-
     html
         font-size: 37%
 
 @media screen and ( max-width: 767px )
-
-    html
-        font-size: 28%
-
-@media screen and ( max-width: 653px )
-
     html
         font-size: 28%
 
 @media screen and ( max-width: 575px )
-
     html
         font-size: 35%
-
     .wrapper
         transform: rotate(90deg)
 
 @media screen and ( max-width: 381px )
-
     html
         font-size: 30%
+    .wrapper
+        transform: rotate(90deg)
 
+@media screen and ( max-width: 300px )
+    html
+        font-size: 25%
     .wrapper
         transform: rotate(90deg)

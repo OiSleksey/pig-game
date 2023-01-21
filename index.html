@@ -4,39 +4,267 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/normalize.css" />
     <link rel="stylesheet" href="css/style.css" />
     <script defer src="js/script.js"></script>
     <title>Pig game</title>
   </head>
+
   <body>
     <div class="wrapper">
       <main class="pig pig__head">
-        <section class="player player__0 player_active">
-          <h2 class="name" id="name__0">Player 1</h2>
-          <p class="score" id="score__0">47</p>
-          <div class="current">
-            <p class="current__label">Current point</p>
-            <p class="current__score" id="current__0">0</p>
-          </div>
-        </section>
-        <section class="player player__1">
-          <h2 class="name" id="name__1">Player 2</h2>
-          <p class="score" id="score__1">31</p>
+        <section class="player player__1 player_active">
+          <h2 class="name" id="name__1">Player 1</h2>
+          <p class="score" id="score__1">47</p>
           <div class="current">
             <p class="current__label">Current point</p>
             <p class="current__score" id="current__1">0</p>
           </div>
         </section>
+        <section class="player player__2">
+          <h2 class="name" id="name__2">Player 2</h2>
+          <p class="score" id="score__2">32</p>
+          <div class="current">
+            <p class="current__label">Current point</p>
+            <p class="current__score" id="current__2">0</p>
+          </div>
+        </section>
 
-        <img src="img/nose.png" alt="Playing dice" class="dice" />
-        <button class="btn btn__new">New game</button>
-        <button class="btn btn__roll">Roll dice</button>
-        <button class="btn btn__hold">Leave</button>
+        <img
+          src="img/nose.png"
+          alt="Playing dice"
+          class="dice img-dice__style"
+        />
+        <button class="btn__new btn-style btn-position">New game</button>
+
+        <button class="btn__roll btn-style btn-position">Roll dice</button>
+        <button class="btn__hold btn-style btn-position">Bank</button>
       </main>
       <div class="pig__ear-left"></div>
       <div class="pig__ear-left2"></div>
       <div class="pig__ear-right"></div>
       <div class="pig__ear-right2"></div>
+      <div class="start-game">
+        <h1 class="start-game__name start-game__name_animation">Pig Game</h1>
+        <h4 class="start-game__plane">This game is played by 2 players.</h4>
+        <form class="start-game__form date-form">
+          <h3 class="start-game__players-name">
+            To start the game - enter the names of the players.
+          </h3>
+          <div class="start-game__block-input">
+            <input
+              type="text"
+              name="input-name"
+              id="input-name_1"
+              class="start-game__input-player-1 date-form__input"
+              placeholder=" "
+              maxlength="8"
+            />
+            <label
+              class="start-game__label-player-1 date-form__label"
+              for="input-name_1"
+              >Player 1</label
+            >
+          </div>
+          <div class="start-game__block-input">
+            <input
+              type="text"
+              name="input-name"
+              id="input-name_2"
+              class="start-game__input-player-2 date-form__input"
+              placeholder=" "
+              maxlength="8"
+            />
+            <label
+              class="start-game__label-player-2 date-form__label"
+              for="input-name_2"
+              >Player 2</label
+            >
+          </div>
+          <h3 class="start-game__default-name">
+            If you do not enter a name, then the names will be set to standard:
+            (Player 1 and Player 2)
+          </h3>
+          <button
+            class="start-game__btn-start btn-style start-game__btn-start_animation"
+            type="submit"
+          >
+            Start game
+          </button>
+        </form>
+        <button type="submit" class="start-game__btn-rule-game btn-style">
+          Rules of the game
+        </button>
+      </div>
+
+      <div class="rule-game display_none" id="test">
+        <div
+          class="rule-game__close rule-game__close_active icon-close icon-close_active"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <h1 class="rule-game__title rule-game__title_animation">
+          Rules of the game
+        </h1>
+        <div class="rule-game__tabs tabs">
+          <div class="rule-game__tab tabs_tab">
+            <input
+              class="rule-game__input tabs__input"
+              type="radio"
+              name="tabgroup"
+              id="tab-1"
+              checked
+            />
+            <label class="rule-game__label tabs__label" for="tab-1">One</label>
+            <div class="rule-game__content tabs__content">
+              <ol class="rule-game__list">
+                <li>Players take turns rolling the dice.</li>
+                <li>The first player to start playing is the active player.</li>
+                <li>
+                  On his turn, the active player can roll the die using the
+                  <button class="btn-style">Roll dice</button> button as many
+                  times as he wants.
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="rule-game__tab tabs__tab">
+            <input
+              class="rule-game__input tabs__input"
+              type="radio"
+              name="tabgroup"
+              id="tab-2"
+            />
+            <label class="rule-game__label tabs__label" for="tab-2">Two</label>
+            <div class="rule-game__content tabs__content">
+              <ol class="rule-game__list">
+                <li>
+                  If a
+                  <img
+                    src="img/dice2.png"
+                    alt="2"
+                    class="img-dice__style img-dice__style_rules"
+                  />,
+                  <img
+                    src="img/dice3.png"
+                    alt="3"
+                    class="img-dice__style img-dice__style_rules"
+                  />,
+                  <img
+                    src="img/dice4.png"
+                    alt="4"
+                    class="img-dice__style img-dice__style_rules"
+                  />,
+                  <img
+                    src="img/dice5.png"
+                    alt="5"
+                    class="img-dice__style img-dice__style_rules"
+                  />
+                  or
+                  <img
+                    src="img/dice6.png"
+                    alt="6"
+                    class="img-dice__style img-dice__style_rules"
+                  />
+                  is rolled, the player adds that number of points to their
+                  current turn point.
+                  <div class="current current_rules">
+                    <p class="current__label">Current point</p>
+                    <p class="current__score" id="current__1">0</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="rule-game__tab tabs__tab">
+            <input
+              class="rule-game__input tabs__input"
+              type="radio"
+              name="tabgroup"
+              id="tab-3"
+            />
+            <label class="rule-game__label tabs__label" for="tab-3"
+              >Three</label
+            >
+            <div class="rule-game__content tabs__content">
+              <ol class="rule-game__list">
+                <li>
+                  If a player rolls a
+                  <img
+                    src="img/dice1.png"
+                    alt="1"
+                    class="img-dice__style img-dice__style_rules"
+                  />, they lose all their current points and their turn ends.
+                </li>
+                <li>
+                  The active player can end his turn at any time and save his
+                  current point and transfer them to his score using the button
+                  <button class="btn-style">Bank</button>
+                </li>
+                <li>
+                  Also, the active player can skip his turn using the button
+                  <button class="btn-style">Bank</button>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="rule-game__tab tabs__tab">
+            <input
+              class="rule-game__input tabs__input"
+              type="radio"
+              name="tabgroup"
+              id="tab-4"
+            />
+            <label class="rule-game__label tabs__label" for="tab-4">Four</label>
+            <div class="rule-game__content tabs__content">
+              <ol class="rule-game__list">
+                <li>
+                  The <span class="rule-game__winner">winner</span> is the
+                  player who has a score of
+                  <p class="score score_rules">50</p>
+                  or more.
+                </li>
+                <li>
+                  The game can be restarted with the button
+                  <button class="btn-style">New game</button>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="victory display_none">
+        <div class="victory__left">
+          <img src="img/victory2.png" class="victory__img-left" alt="" />
+        </div>
+        <div class="victory__text">
+          <h2 class="victory__title">victory</h2>
+          <h2 class="victory__name">Player 1</h2>
+        </div>
+        <div class="victory__right">
+          <div
+            class="victory__close victory__close_active icon-close icon-close_active"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <img src="img/victory3.png" class="victory__img-right" alt="" />
+        </div>
+      </div>
+      <div class="question">
+        <img
+          src="icons/question-mark(1).png"
+          class="question__icon"
+          alt="question pig"
+        />
+      </div>
     </div>
   </body>
 </html>
