@@ -515,21 +515,12 @@ main {
     font-size: 28%; } }
 @media screen and (max-width: 575px) {
   html {
-    font-size: 35%; }
-
-  .wrapper {
-    transform: rotate(90deg); } }
+    font-size: 35%; } }
 @media screen and (max-width: 381px) {
   html {
-    font-size: 30%; }
-
-  .wrapper {
-    transform: rotate(90deg); } }
+    font-size: 30%; } }
 @media screen and (max-width: 300px) {
   html {
-    font-size: 25%; }
-
-  .wrapper {
-    transform: rotate(90deg); } }
+    font-size: 25%; } }
 
 /*# sourceMappingURL=style.css.map */
