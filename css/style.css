@@ -507,9 +507,9 @@ main {
     font-size: 37%; } }
 @media screen and (max-width: 767px) {
   html {
-    font-size: 20%; } }
+    font-size: 14%; } }
 @media screen and (max-width: 575px) {
   html {
-    font-size: 20%; } }
+    font-size: 18%; } }
 
 /*# sourceMappingURL=style.css.map */
