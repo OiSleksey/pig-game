@@ -505,44 +505,11 @@ main {
 @media screen and (max-width: 991px) {
   html {
     font-size: 37%; } }
-@media screen and (max-width: 912px) {
-  html {
-    font-size: 47%; } }
-@media screen and (max-width: 844px) {
-  html {
-    font-size: 37%; } }
-@media screen and (max-width: 820px) {
-  html {
-    font-size: 42%; } }
 @media screen and (max-width: 767px) {
   html {
-    font-size: 28%; } }
+    font-size: 20%; } }
 @media screen and (max-width: 575px) {
   html {
-    font-size: 35%; } }
-@media screen and (max-width: 540px) {
-  html {
-    font-size: 28%; } }
-@media screen and (max-width: 425px) {
-  html {
-    font-size: 23%; } }
-@media screen and (max-width: 414px) {
-  html {
-    font-size: 21%; } }
-@media screen and (max-width: 381px) {
-  html {
-    font-size: 19%; } }
-@media screen and (max-width: 360px) {
-  html {
-    font-size: 100%; } }
-@media screen and (max-width: 320px) {
-  html {
-    font-size: 30%; } }
-@media screen and (max-width: 300px) {
-  html {
-    font-size: 25%; } }
-@media screen and (max-width: 380px) {
-  html {
-    font-size: 14%; } }
+    font-size: 20%; } }
 
 /*# sourceMappingURL=style.css.map */
