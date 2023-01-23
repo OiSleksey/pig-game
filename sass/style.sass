@@ -31,6 +31,7 @@ $colors-other2: #d593a8
 $drop-shadow-name-player: drop-shadow(1px 1px 0.1px rgb(56, 15, 37))
 $drop-shadow-score-player: drop-shadow(1px 1px 0.1px rgb(58, 11, 42))
 $drop-shadow-dice: drop-shadow(0.1px 0.1px 1px rgb(139, 63, 63))
+$drop-shadow-question: drop-shadow(-1px 1px 3px #380f25)
 $box-shadow-current: 7px 7px 18px #878787, -7px -7px 18px #878787
 $box-shadow-btn: 0px 0px 8px #666666, 0px 0px 8px #878787
 
@@ -59,7 +60,7 @@ body
     align-items: center
     justify-content: center
     // background: linear-gradient(72.01deg, #ffe2c9d3 0%, #ffe2c9d3 50.02%, #d9bea9b2 97.4%)
-    overflow: auto
+    overflow: hidden
 
 .container
     height: 100%
@@ -252,11 +253,11 @@ main
         border-radius: 20rem
         &__span
         & span:nth-child(1)
-            transform: translateY(1.3rem) rotate(45deg)
+            transform: translateY(1.4rem) rotate(45deg)
         & span:nth-child(2)
             opacity: 0
         & span:nth-child(3)
-            transform: translateY(-1.2rem) rotate(-45deg)
+            transform: translateY(-1.1rem) rotate(-45deg)
 
 //Модальное окно стартовое окно
 .start-game
@@ -274,7 +275,7 @@ main
     color: $colors-text-start-game_2
     font-size: 2rem
     text-align: center
-    backface-visibility: hidden
+    // backface-visibility: hidden
     &__name
         color: $colors-text-start-game_1
         margin-top: 0
@@ -310,6 +311,7 @@ main
     &__default-name
         font-size: 3rem
         margin-bottom: 3.5rem
+        line-height: 3rem
         color: $colors-text-default-name-start-game
     &__btn-start
         margin-bottom: 3rem
@@ -326,9 +328,9 @@ main
         &:active
             transform: translateY(3px)
     &_active
-        animation: run 1s ease-in .2s reverse forwards
+        animation: run .3s ease-in .2s reverse forwards
     &_close
-        animation: run 1s ease-out .2s normal backwards
+        animation: run .3s ease-out .2s normal backwards
 
 .date-form
     &__label
@@ -355,6 +357,11 @@ main
         letter-spacing: 0.1rem
         font-size: 4rem
         color: $colors-text-date-form-input
+        &::-webkit-placeholder
+            text-align: center
+        &:-moz-placeholder
+            text-align: center
+
 .date-form__input:focus + .date-form__label, .date-form__input:not(:placeholder-shown) + .date-form__label
     top: 0
     transform: translateY(-50%) scale(.5) translateX(10px)
@@ -365,7 +372,6 @@ main
     border-radius: 10rem
     position: absolute
     top: -4rem
-    left: 150%
     width: 100%
     opacity: 1
     height: 110%
@@ -375,7 +381,7 @@ main
     color: $colors-text-rule-game_2
     font-size: 2rem
     text-align: center
-    // backface-visibility: hidden
+    backface-visibility: hidden
     &__title
         color: $colors-text-rule-game_1
         margin-top: 0
@@ -435,9 +441,9 @@ main
         margin: 0 1rem 0 1rem
         color: $colors-text-score-rule-game
     &_active
-        animation: run 1s ease-out .5s normal both
+        animation: run .3s ease-out .2s normal both
     &_close
-        animation: run 1s ease-in .2s reverse both
+        animation: run .3s ease-in .2s reverse both
 //модальное окно победы    
 .victory
     padding: 3rem
@@ -499,7 +505,8 @@ main
         width: 10rem
         cursor: pointer
         opacity: 0
-        transition: 1.5s all
+        transition: 1.1s all
+        filter: $drop-shadow-question
 
 .hidden
     opacity: 0
@@ -548,19 +555,25 @@ main
     40%, 60%
         transform: translate3d(4px, 0, 0)
 
+// @keyframes run
+//     0%
+//         left: 100%
+//         opacity: 0
+//         display: none
+//         transform: scaleX(0)
+//     10%
+//         left: 100%
+//         opacity: 0.9
+//     100%
+//         left: 0
+//         opacity: 1
+//         transform: scaleX(1)
+
 @keyframes run
     0%
-        left: 100%
-        opacity: 0
-        display: none
-        transform: scaleX(0)
-    10%
-        left: 100%
-        opacity: 0.9
+        transform: translateY(3%) scale(0.0001)
     100%
-        left: 0
-        opacity: 1
-        transform: scaleX(1)
+        transform: scale(1)
 
 @media screen and ( max-width: 2500px )
     html
