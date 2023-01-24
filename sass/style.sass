@@ -49,18 +49,19 @@ $height-60rem: 60rem
 
 html
     font-size: 60%
-
+body, html
+    height: 100%
 body
     font-family: 'Play', sans-serif
     font-weight: 400
     background: url(../img/background11.webp) no-repeat bottom center
     background-size: cover
-    height: 100%
     display: flex
     align-items: center
     justify-content: center
-    background: linear-gradient(72.01deg, #ffe2c9d3 0%, #ffe2c9d3 50.02%, #d9bea9b2 97.4%)
-    overflow: hidden
+    flex-wrap: wrap
+    // background: linear-gradient(72.01deg, #ffe2c9d3 0%, #ffe2c9d3 50.02%, #d9bea9b2 97.4%)
+    overflow-x: hidden
 
 .container
     height: 100%
@@ -336,10 +337,10 @@ main
     &__label
         color: $colors-text-date-form-label
         position: absolute
-        transform: tranlateY(-50%)
-        transform-origin: left center
+        transform: translate(-50%)
+        transform-origin: center
         top: 20%
-        left: 8rem
+        left: 50%
         pointer-events: none
         transition: .3s ease-in-out
         background: linear-gradient(337deg, #5b4253, #4d3846)
@@ -357,14 +358,10 @@ main
         letter-spacing: 0.1rem
         font-size: 4rem
         color: $colors-text-date-form-input
-        &::-webkit-placeholder
-            text-align: center
-        &:-moz-placeholder
-            text-align: center
 
 .date-form__input:focus + .date-form__label, .date-form__input:not(:placeholder-shown) + .date-form__label
     top: 0
-    transform: translateY(-50%) scale(.5) translateX(10px)
+    transform: translate(-50%,-50%) scale(.5)
     opacity: 1
 
 .rule-game
@@ -428,9 +425,9 @@ main
         right: 0
         bottom: 0
     &__current
-        width: 26rem
+        width: 22rem
         margin: 2rem auto 0 auto
-        line-height: 4rem
+        line-height: 3rem
         background: $background-current-rule-game
     &__winner
         font-size: 4.8rem
@@ -601,7 +598,7 @@ main
 ///26% 991
 @media screen and ( max-width: 991px )
     html
-        font-size: 20%
+        font-size: 26%
 
 // @media screen and ( max-width: 912px )
 //     html

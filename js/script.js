@@ -194,3 +194,12 @@ question.addEventListener('click', function () {
 //     .getComputedStyle(document.querySelector('.victory__name'), ':after')
 //     .getPropertyValue('content')
 // );
+
+// //////////test overflow
+// let docWidth = document.documentElement.offsetWidth;
+
+// [].forEach.call(document.querySelectorAll('*'), function (el) {
+//   if (el.offsetWidth > docWidth) {
+//     console.log(el);
+//   }
+// });

@@ -7,17 +7,19 @@
 html {
   font-size: 60%; }
 
+body, html {
+  height: 100%; }
+
 body {
   font-family: "Play", sans-serif;
   font-weight: 400;
   background: url(../img/background11.webp) no-repeat bottom center;
   background-size: cover;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(72.01deg, #ffe2c9d3 0%, #ffe2c9d3 50.02%, #d9bea9b2 97.4%);
-  overflow: hidden; }
+  flex-wrap: wrap;
+  overflow-x: hidden; }
 
 .container {
   height: 100%;
@@ -276,10 +278,10 @@ main {
 .date-form__label {
   color: #fa9d9d;
   position: absolute;
-  transform: tranlateY(-50%);
-  transform-origin: left center;
+  transform: translate(-50%);
+  transform-origin: center;
   top: 20%;
-  left: 8rem;
+  left: 50%;
   pointer-events: none;
   transition: 0.3s ease-in-out;
   background: linear-gradient(337deg, #5b4253, #4d3846);
@@ -297,14 +299,10 @@ main {
   letter-spacing: 0.1rem;
   font-size: 4rem;
   color: #FFCFD2; }
-  .date-form__input::-webkit-placeholder {
-    text-align: center; }
-  .date-form__input:-moz-placeholder {
-    text-align: center; }
 
 .date-form__input:focus + .date-form__label, .date-form__input:not(:placeholder-shown) + .date-form__label {
   top: 0;
-  transform: translateY(-50%) scale(0.5) translateX(10px);
+  transform: translate(-50%, -50%) scale(0.5);
   opacity: 1; }
 
 .rule-game {
@@ -368,9 +366,9 @@ main {
     right: 0;
     bottom: 0; }
   .rule-game__current {
-    width: 26rem;
+    width: 22rem;
     margin: 2rem auto 0 auto;
-    line-height: 4rem;
+    line-height: 3rem;
     background: #8f547c; }
   .rule-game__winner {
     font-size: 4.8rem;
@@ -502,7 +500,7 @@ main {
     font-size: 44%; } }
 @media screen and (max-width: 991px) {
   html {
-    font-size: 20%; } }
+    font-size: 26%; } }
 @media screen and (max-width: 767px) {
   html {
     font-size: 14%; } }
