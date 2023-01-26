@@ -206,7 +206,7 @@ class App {
       document.getElementById(
         `score__${this.#dataGame.activePlayer}`
       ).textContent = this.#dataGame.totalScores[this.#dataGame.activePlayer];
-      if (this.#dataGame.totalScores[this.#dataGame.activePlayer] >= 5) {
+      if (this.#dataGame.totalScores[this.#dataGame.activePlayer] >= 50) {
         this.victory();
       } else {
         this.switchActivePlayer();
