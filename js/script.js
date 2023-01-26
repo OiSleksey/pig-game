@@ -55,7 +55,7 @@ const initGame = function () {
   diceElement.src = 'img/nose.png';
 };
 
-initGame();
+// initGame();
 
 //Switching players
 const switchActivePlayer = function () {
@@ -203,3 +203,30 @@ question.addEventListener('click', function () {
 //     console.log(el);
 //   }
 // });
+
+//полученные данные
+const data = JSON.parse(localStorage.getItem('workouts'));
+console.log(JSON.parse(localStorage.getItem('workouts')));
+
+localStorage.setItem(
+  'test',
+  JSON.stringify({ lastName: 'Yore', number: 123213 })
+);
+localStorage.setItem(
+  'test',
+  JSON.stringify({ lastName: 'GTEDS', number: 123213 })
+);
+localStorage.setItem(
+  'test',
+  JSON.stringify({ lastName: 'FDFFD', number: 123213 })
+);
+console.log(JSON.parse(localStorage.getItem('test')));
+
+///Очистка определенных локальных данных
+
+function reset() {
+  //удаление локального сохранненого api test
+  localStorage.removeItem('test');
+  ///ПЕРЕзагрузка страницы
+  location.reload();
+}

@@ -270,9 +270,9 @@ main {
     margin: 0 3rem; }
     .start-game__btn-rule-game:active {
       transform: translateY(3px); }
-  .start-game_active {
-    animation: run 0.3s ease-in 0.2s reverse forwards; }
   .start-game_close {
+    animation: run 0.3s ease-in 0s reverse forwards; }
+  .start-game_active {
     animation: run 0.3s ease-out 0.2s normal backwards; }
 
 .date-form__label {

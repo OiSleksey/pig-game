@@ -277,6 +277,7 @@ main
     font-size: 2rem
     text-align: center
     // backface-visibility: hidden
+    // opacity: 0
     &__name
         color: $colors-text-start-game_1
         margin-top: 0
@@ -328,9 +329,9 @@ main
         margin: 0 3rem
         &:active
             transform: translateY(3px)
-    &_active
-        animation: run .3s ease-in .2s reverse forwards
     &_close
+        animation: run .3s ease-in 0s reverse forwards
+    &_active
         animation: run .3s ease-out .2s normal backwards
 
 .date-form
