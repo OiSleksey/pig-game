@@ -35,7 +35,9 @@ class App {
     isModalRule: false,
     isVictory: false,
     isHiddenBtnName: false,
-    imgDiceSrc: 'http://127.0.0.1:5500/img/nose.png',
+    isReset: true,
+    imgDiceSrc: diceElement.src,
+    imgDiceSrcDefault: null,
     namePlayer1: 'Player 1',
     namePlayer2: 'Player 2',
     nameVictory: null,
@@ -71,6 +73,17 @@ class App {
     question.addEventListener('click', this.hint.bind(this));
   }
 
+  //remove all localStorage data
+  reset() {
+    //Deleting local saved api test
+    localStorage.removeItem('pigGame');
+    //Save default class="dice" attribute src=../img.nose.png
+    this.#dataGame.imgDiceSrcDefault = diceElement.src;
+    this.setLocaleStorage();
+    //Page reload
+    location.reload();
+  }
+
   //SetLocaleStorage
   setLocaleStorage() {
     const setData = localStorage.setItem(
@@ -81,12 +94,10 @@ class App {
 
   //GetLocaleStorage
   getLocaleStorage() {
-    console.log(this.#dataGame);
     const getData = JSON.parse(localStorage.getItem('pigGame'));
     if (getData) {
       this.#dataGame = getData;
       this.updateUi();
-      console.log(this.#dataGame);
     }
   }
 
@@ -138,6 +149,10 @@ class App {
   }
   //Game initial conditions
   initGame() {
+    if (this.#dataGame.isReset) {
+      this.reset();
+      this.#dataGame.isReset = false;
+    }
     if (JSON.parse(localStorage.getItem('pigGame'))) {
       localStorage.removeItem('pigGame');
     }
@@ -147,7 +162,7 @@ class App {
     this.#dataGame.totalScores = [0, 0];
     this.#dataGame.currentPoint = 0;
     this.#dataGame.activePlayer = 0;
-    this.#dataGame.imgDiceSrc = 'http://127.0.0.1:5500/img/nose.png';
+    this.#dataGame.imgDiceSrc = diceElement.src;
     score1Element.textContent = 0;
     score2Element.textContent = 0;
     current1Element.textContent = 0;
@@ -164,7 +179,7 @@ class App {
     playerNameTogether.forEach(name => {
       name.classList.remove('hidden');
     });
-    diceElement.src = 'http://127.0.0.1:5500/img/nose.png';
+    diceElement.src = this.#dataGame.imgDiceSrcDefault;
     this.setLocaleStorage();
   }
 
