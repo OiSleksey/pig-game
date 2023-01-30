@@ -35,7 +35,7 @@ class App {
     isModalRule: false,
     isVictory: false,
     isHiddenBtnName: false,
-    isReset: true,
+    isReset: false,
     imgDiceSrc: diceElement.src,
     imgDiceSrcDefault: null,
     namePlayer1: 'Player 1',
@@ -127,9 +127,7 @@ class App {
       modalWindowStartGAme.classList.add('start-game_close');
       question.style.opacity = '100';
     } else {
-      console.log(this.#dataGame);
       if (this.#dataGame.isModalRule) {
-        console.log(123);
         window.addEventListener('load', this.ruleGame.bind(this));
       }
     }
@@ -149,9 +147,9 @@ class App {
   }
   //Game initial conditions
   initGame() {
-    if (this.#dataGame.isReset) {
+    if (!this.#dataGame.isReset) {
       this.reset();
-      this.#dataGame.isReset = false;
+      this.#dataGame.isReset = true;
     }
     if (JSON.parse(localStorage.getItem('pigGame'))) {
       localStorage.removeItem('pigGame');
