@@ -1,20 +1,21 @@
 'use strict';
+console.log('fix bag');
 
 //variables
-const score1Element = document.querySelector('#score__1');
-const score2Element = document.querySelector('#score__2');
-const current1Element = document.querySelector('#current__1');
-const current2Element = document.querySelector('#current__2');
+const score1Element = document.querySelector('#score__0');
+const score2Element = document.querySelector('#score__1');
+const current1Element = document.querySelector('#current__0');
+const current2Element = document.querySelector('#current__1');
 const diceElement = document.querySelector('.dice');
 const btnNew = document.querySelector('.btn__new');
 const btnRoll = document.querySelector('.btn__roll');
 const btnHold = document.querySelector('.btn__hold');
 const player1Element = document.querySelector('.player__1');
 const player2Element = document.querySelector('.player__2');
-const player1Name = document.querySelector('#name__1');
-const player2Name = document.querySelector('#name__2');
+const player1Name = document.querySelector('#name__0');
+const player2Name = document.querySelector('#name__1');
 const playerNameTogether = document.querySelectorAll('.name');
-//Изменил класс
+//Change className
 // const playerScoreTogether = document.querySelectorAll('.score');
 const btnStartGame = document.querySelector('.start-game__btn-start');
 const btnRuleGame = document.querySelector('.start-game__btn-rule-game');
@@ -24,209 +25,350 @@ const player1NameSet = document.querySelector('.start-game__input-player-1');
 const player2NameSet = document.querySelector('.start-game__input-player-2');
 const modalWindowVictory = document.querySelector('.victory');
 const nameVictory = document.querySelector('.victory__name');
-const closeModalWindowVictory = document.querySelector('.victory__close');
+const crossVictory = document.querySelector('.victory__close');
 const closeModalWindowRuleGame = document.querySelector('.rule-game__close');
 const question = document.querySelector('.question__icon');
 
-let totalScores, currentScore, activePlayer, isPlaying;
+class App {
+  #dataGame = {
+    imgDiceSrcDefault: null,
+    isReset: false,
+    isPlaying: true,
+    isModalStart: true,
+    isModalRule: false,
+    isVictory: false,
+    isHiddenBtnName: false,
+    imgDiceSrc: diceElement.src,
+    namePlayer1: 'Player 1',
+    namePlayer2: 'Player 2',
+    nameVictory: null,
+    activePlayer: 0,
+    currentPoint: 0,
+    totalScores: [0, 0],
+  };
 
-//Game initial conditions
-const initGame = function () {
-  totalScores = [0, 0, 0];
-  currentScore = 0;
-  activePlayer = 1;
-  isPlaying = true;
-  score1Element.textContent = 0;
-  score2Element.textContent = 0;
-  current1Element.textContent = 0;
-  current2Element.textContent = 0;
-  player1Element.classList.remove('player_winner');
-  player2Element.classList.remove('player_winner');
-  player1Element.classList.remove('player_active');
-  player2Element.classList.remove('player_active');
-  player1Element.classList.add('player_active');
-  // player1Name.textContent = 'Player 1';
-  // player2Name.textContent = 'Player 2';
-  btnRoll.classList.remove('hidden');
-  btnHold.classList.remove('hidden');
-  playerNameTogether.forEach(name => {
-    name.classList.remove('hidden');
-  });
-  diceElement.src = 'img/nose.png';
-};
+  #defaultDate = {
+    imgDiceSrcDefault: null,
+    isFixed: false,
+  };
 
-// initGame();
+  constructor() {
+    //Roll the dice Main game(main window)
+    btnRoll.addEventListener('click', this.rollTheDice.bind(this));
+    //Btn Bank Main game(main window)
+    btnHold.addEventListener('click', this.skipCourse.bind(this));
+    //Btn New game Main game(main window)
+    btnNew.addEventListener('click', this.initGame.bind(this));
+    //btn Rule game Start-game(modal window)
+    btnRuleGame.addEventListener('click', this.ruleGame.bind(this));
+    //btn Cross Rule game(modal window)
+    closeModalWindowRuleGame.addEventListener(
+      'click',
+      this.closeRuleGame.bind(this)
+    );
+    //btn Start game Start-game(modal window)
+    btnStartGame.addEventListener('click', this.startGame.bind(this));
+    //btn cross Victory(modal window)
+    crossVictory.addEventListener(
+      'click',
+      this.closeModalWindowVictory.bind(this)
+    );
+    //btn hint or question, Call Srart game and Rule game(modal window)
+    question.addEventListener('click', this.hint.bind(this));
+    //Get Data game from locale storage
+    this.getLocaleStorage();
+    //Fixed bag as localeStorage file path img/nose.png
+    this.resetFixNose();
+  }
 
-//Switching players
-const switchActivePlayer = function () {
-  currentScore = 0;
-  document.getElementById(`current__${activePlayer}`).textContent =
-    currentScore;
-  activePlayer = activePlayer === 1 ? 2 : 1;
-  player1Element.classList.toggle('player_active');
-  player2Element.classList.toggle('player_active');
-};
-
-//Roll the dice
-btnRoll.addEventListener('click', function () {
-  if (isPlaying) {
-    const diceNumber = Math.trunc(Math.random() * 6 + 1);
-    diceElement.src = `img/dice${diceNumber}.png`;
-    if (diceNumber !== 1) {
-      currentScore += diceNumber;
-      document.getElementById(`current__${activePlayer}`).textContent =
-        currentScore;
-    } else {
-      switchActivePlayer();
+  //remove all localStorage data
+  resetFixNose() {
+    if (JSON.parse(localStorage.getItem('pigGameDefault'))) {
+      this.#defaultDate = JSON.parse(localStorage.getItem('pigGameDefault'));
+      return;
+    }
+    if (!this.#defaultDate.isFixed) {
+      //Deleting local saved api test
+      localStorage.removeItem('pigGame');
+      this.#defaultDate.isFixed = true;
+      localStorage.setItem('pigGameDefault', JSON.stringify(this.#defaultDate));
+      //Page reload
+      location.reload();
+      // //Save default class="dice" attribute src=../img.nose.png
+      //
+      // //Bag fixed = true
+      // this.defaultDate.isFixed = true;
+      // //Set Data game from locale storage
+      // this.setLocaleStorage();
+      // //Get Data game from locale storage
+      // this.getLocaleStorage();
     }
   }
-});
+  //remove all localStorage data
+  reset() {
+    //Deleting local saved api test
+    localStorage.removeItem('pigGame');
+    // //Page reload
+    // location.reload();
+  }
 
-//Кнопка БАНК
-btnHold.addEventListener('click', function () {
-  if (isPlaying) {
-    totalScores[activePlayer] += currentScore;
-    document.getElementById(`score__${activePlayer}`).textContent =
-      totalScores[activePlayer];
-    if (totalScores[activePlayer] >= 50) {
-      victory();
-    } else {
-      switchActivePlayer();
+  //SetLocaleStorage
+  setLocaleStorage() {
+    const setData = localStorage.setItem(
+      'pigGame',
+      JSON.stringify(this.#dataGame)
+    );
+    // const setDataDefault = localStorage.setItem(
+    //   'pigGameDefault',
+    //   JSON.stringify(this.#defaultDate)
+    // );
+  }
+
+  //GetLocaleStorage
+  getLocaleStorage() {
+    const getData = JSON.parse(localStorage.getItem('pigGame'));
+    if (getData) {
+      this.#dataGame = getData;
+      this.updateUi();
     }
   }
-});
 
-//Кнопка новая игра
-btnNew.addEventListener('click', initGame);
+  updateUi() {
+    if (!this.#dataGame.isReset) {
+      this.#dataGame.imgDiceSrcDefault = diceElement.src;
+      this.#dataGame.isReset = true;
+      this.setLocaleStorage();
+    }
+    document.getElementById(
+      `current__${this.#dataGame.activePlayer}`
+    ).textContent = this.#dataGame.currentPoint;
 
-//Открытие модального окна правил
-btnRuleGame.addEventListener('click', function (e) {
-  e.preventDefault();
-  e.stopPropagation();
-  modalWindowRuleGame.classList.remove('display_none');
-  modalWindowRuleGame.classList.remove('rule-game_close');
-  void modalWindowRuleGame.offsetWidth;
-  modalWindowRuleGame.classList.add('rule-game_active');
-});
+    document.getElementById(
+      `score__${this.#dataGame.activePlayer}`
+    ).textContent = this.#dataGame.totalScores[this.#dataGame.activePlayer];
 
-//Закрытия модального окна правил
-closeModalWindowRuleGame.addEventListener('click', function (e) {
-  e.preventDefault();
-  modalWindowRuleGame.classList.remove('rule-game_active');
-  void modalWindowRuleGame.offsetWidth;
-  modalWindowRuleGame.classList.add('rule-game_close');
-});
+    document.getElementById(
+      `score__${+!this.#dataGame.activePlayer}`
+    ).textContent = this.#dataGame.totalScores[+!this.#dataGame.activePlayer];
 
-//Кнопка начального стартового окна где устанавливаються имена и можно посмотреть правила
-btnStartGame.addEventListener('click', function (e) {
-  question.style.opacity = '100';
-  e.preventDefault();
-  e.stopPropagation();
-  modalWindowStartGAme.classList.remove('start-game_close');
-  void modalWindowStartGAme.offsetWidth;
-  modalWindowStartGAme.classList.add('start-game_active');
-  const inputName1 = document.querySelector('.start-game__input-player-1');
-  const inputName2 = document.querySelector('.start-game__input-player-2');
-  if (inputName1.value.trimStart() !== '') {
-    player1Name.textContent = inputName1.value;
-    inputName1.value = '';
+    if (this.#dataGame.activePlayer === 0) {
+      player1Element.classList.add('player_active');
+      player2Element.classList.remove('player_active');
+    } else {
+      player1Element.classList.remove('player_active');
+      player2Element.classList.add('player_active');
+    }
+
+    if (!this.#dataGame.isModalStart) {
+      modalWindowStartGAme.style.opacity = '0';
+      modalWindowStartGAme.classList.add('start-game_close');
+      question.style.opacity = '100';
+    } else {
+      if (this.#dataGame.isModalRule) {
+        window.addEventListener('load', this.ruleGame.bind(this));
+      }
+    }
+
+    if (this.#dataGame.isVictory) {
+      this.victory();
+    }
+
+    if (this.#dataGame.isHiddenBtnName) {
+      this.hiddenBtnName();
+    }
+
+    diceElement.src = this.#dataGame.imgDiceSrc;
+
+    player1Name.textContent = this.#dataGame.namePlayer1;
+    player2Name.textContent = this.#dataGame.namePlayer2;
   }
-  if (inputName2.value.trimStart() !== '') {
-    player2Name.textContent = inputName2.value;
-    inputName2.value = '';
+  //Game initial conditions
+  initGame() {
+    this.reset();
+    if (!this.#dataGame.isReset) {
+      this.#dataGame.imgDiceSrcDefault = diceElement.src;
+      this.#dataGame.isReset = true;
+    }
+    this.#dataGame.isPlaying = true;
+    this.#dataGame.isModalStart = false;
+    this.#dataGame.isHiddenBtnName = false;
+    this.#dataGame.totalScores = [0, 0];
+    this.#dataGame.currentPoint = 0;
+    this.#dataGame.activePlayer = 0;
+    // this.#dataGame.imgDiceSrc = diceElement.src;
+    score1Element.textContent = 0;
+    score2Element.textContent = 0;
+    current1Element.textContent = 0;
+    current2Element.textContent = 0;
+    player1Element.classList.remove('player_winner');
+    player2Element.classList.remove('player_winner');
+    player1Element.classList.remove('player_active');
+    player2Element.classList.remove('player_active');
+    player1Element.classList.add('player_active');
+    // player1Name.textContent = 'Player 1';
+    // player2Name.textContent = 'Player 2';
+    btnRoll.classList.remove('hidden');
+    btnHold.classList.remove('hidden');
+    playerNameTogether.forEach(name => {
+      name.classList.remove('hidden');
+    });
+    diceElement.src = this.#dataGame.imgDiceSrcDefault;
+    this.setLocaleStorage();
   }
 
-  question.style.opacity = '100';
-});
+  //Switching players
+  switchActivePlayer() {
+    this.#dataGame.currentPoint = 0;
+    document.getElementById(
+      `current__${this.#dataGame.activePlayer}`
+    ).textContent = this.#dataGame.currentPoint;
+    this.#dataGame.activePlayer = this.#dataGame.activePlayer === 0 ? 1 : 0;
+    player1Element.classList.toggle('player_active');
+    player2Element.classList.toggle('player_active');
+    this.setLocaleStorage();
+  }
 
-//Модальное окно победы
-function victory() {
-  diceElement.src = 'img/nose.png';
-  isPlaying = false;
-  modalWindowVictory.classList.remove('display_none');
-  btnRoll.classList.add('hidden');
-  btnHold.classList.add('hidden');
-  playerNameTogether.forEach(name => {
-    name.classList.add('hidden');
-  });
-  nameVictory.textContent = document.getElementById(
-    `name__${activePlayer}`
-  ).textContent;
-  score1Element.textContent = 0;
-  score2Element.textContent = 0;
-  current1Element.textContent = 0;
-  current2Element.textContent = 0;
-  question.style.opacity = '0';
+  //Roll the dice
+  rollTheDice() {
+    if (this.#dataGame.isPlaying) {
+      const diceNumber = Math.trunc(Math.random() * 6 + 1);
+      diceElement.src = `img/dice${diceNumber}.png`;
+      this.#dataGame.imgDiceSrc = diceElement.src;
+      if (diceNumber !== 1) {
+        this.#dataGame.currentPoint += diceNumber;
+        document.getElementById(
+          `current__${this.#dataGame.activePlayer}`
+        ).textContent = this.#dataGame.currentPoint;
+        this.setLocaleStorage();
+      } else {
+        this.switchActivePlayer();
+      }
+    }
+  }
+
+  //Skip a turn
+  skipCourse() {
+    if (this.#dataGame.isPlaying) {
+      this.#dataGame.totalScores[this.#dataGame.activePlayer] +=
+        this.#dataGame.currentPoint;
+      document.getElementById(
+        `score__${this.#dataGame.activePlayer}`
+      ).textContent = this.#dataGame.totalScores[this.#dataGame.activePlayer];
+      if (this.#dataGame.totalScores[this.#dataGame.activePlayer] >= 50) {
+        this.victory();
+      } else {
+        this.switchActivePlayer();
+      }
+    }
+  }
+
+  //Open Rule game (modal windows)
+  ruleGame(e) {
+    this.#dataGame.isModalRule = true;
+    e.preventDefault();
+    e.stopPropagation();
+    modalWindowRuleGame.classList.remove('display_none');
+    modalWindowRuleGame.classList.remove('rule-game_close');
+    void modalWindowRuleGame.offsetWidth;
+    modalWindowRuleGame.classList.add('rule-game_active');
+    this.setLocaleStorage();
+  }
+
+  //Close Rule game (modal windows)
+  closeRuleGame(e) {
+    this.#dataGame.isModalRule = false;
+    e.preventDefault();
+    modalWindowRuleGame.classList.remove('rule-game_active');
+    void modalWindowRuleGame.offsetWidth;
+    modalWindowRuleGame.classList.add('rule-game_close');
+    this.setLocaleStorage();
+  }
+
+  //Input names Players and Start game
+  startGame(e) {
+    question.style.opacity = '100';
+    e.preventDefault();
+    e.stopPropagation();
+    modalWindowStartGAme.classList.remove('start-game_active');
+    void modalWindowStartGAme.offsetWidth;
+    modalWindowStartGAme.classList.add('start-game_close');
+    const inputName1 = document.querySelector('.start-game__input-player-1');
+    const inputName2 = document.querySelector('.start-game__input-player-2');
+    if (inputName1.value.trimStart() !== '') {
+      this.#dataGame.namePlayer1 = player1Name.textContent = inputName1.value;
+      inputName1.value = '';
+    }
+    if (inputName2.value.trimStart() !== '') {
+      this.#dataGame.namePlayer2 = player2Name.textContent = inputName2.value;
+      inputName2.value = '';
+    }
+    question.style.opacity = '100';
+    this.#dataGame.isModalStart = false;
+    this.setLocaleStorage();
+  }
+
+  //Hidden: Btn (Bank, Roll the Dice),  Name Players
+  hiddenBtnName() {
+    this.#dataGame.isHiddenBtnName = true;
+    btnRoll.classList.add('hidden');
+    btnHold.classList.add('hidden');
+    playerNameTogether.forEach(name => {
+      name.classList.add('hidden');
+    });
+    score1Element.textContent = 0;
+    score2Element.textContent = 0;
+    current1Element.textContent = 0;
+    current2Element.textContent = 0;
+    this.setLocaleStorage();
+  }
+  //Open Victory (modal window)
+  victory() {
+    this.#dataGame.isVictory = true;
+    diceElement.src = this.#dataGame.imgDiceSrcDefault;
+    this.#dataGame.isPlaying = false;
+    modalWindowVictory.classList.remove('display_none');
+    this.hiddenBtnName();
+    if (this.#dataGame.nameVictory) {
+      nameVictory.textContent = this.#dataGame.nameVictory;
+    } else {
+      this.#dataGame.nameVictory = nameVictory.textContent =
+        document.getElementById(
+          `name__${this.#dataGame.activePlayer}`
+        ).textContent;
+    }
+    this.#dataGame.nameVictory;
+    this.#dataGame.imgDiceSrc = this.#dataGame.imgDiceSrcDefault;
+    question.style.opacity = '0';
+    this.setLocaleStorage();
+  }
+
+  //Close Victory(modal window)
+  closeModalWindowVictory() {
+    this.#dataGame.isVictory = false;
+    modalWindowVictory.classList.add('display_none');
+    question.style.opacity = '100';
+    this.#dataGame.nameVictory = null;
+    this.setLocaleStorage();
+  }
+
+  //Hint, call Start game(modal window)
+  hint() {
+    this.#dataGame.isModalStart = true;
+    question.style.opacity = '0';
+    modalWindowStartGAme.style.opacity = '100';
+    modalWindowStartGAme.classList.remove('start-game_close');
+    void modalWindowStartGAme.offsetWidth;
+    modalWindowStartGAme.classList.add('start-game_active');
+    this.setLocaleStorage();
+  }
 }
 
-//Закрытия модального окна победы
-closeModalWindowVictory.addEventListener('click', function () {
-  modalWindowVictory.classList.add('display_none');
-  question.style.opacity = '100';
-});
-
-//Кнопка вопроса
-question.addEventListener('click', function () {
-  question.style.opacity = '0';
-  modalWindowStartGAme.classList.remove('start-game_active');
-  void modalWindowStartGAme.offsetWidth;
-  modalWindowStartGAme.classList.add('start-game_close');
-});
-// test.offsetLeft = '400px';
-// test.offsetTop = '-100';
-
-// alert(test.offsetLeft); // 180 (обратите внимание: число, а не строка "180px")
-// alert(test.offsetTop); // 180
-
-// alert('Текущая прокрутка сверху: ' + window.pageYOffset);
-// alert('Текущая прокрутка слева: ' + window.pageXOffset);
-
-// document.querySelectorAll('.icon-close').forEach(icon => {
-//   icon.addEventListener('click', function () {
-//     document.querySelectorAll('.icon-close').forEach(icon => {
-//       icon.classList.toggle('icon-close_active');
-//     });
-//   });
-// });
-
-// console.log(
-//   window
-//     .getComputedStyle(document.querySelector('.victory__name'), ':after')
-//     .getPropertyValue('content')
-// );
-
-// //////////test overflow
-// let docWidth = document.documentElement.offsetWidth;
-
-// [].forEach.call(document.querySelectorAll('*'), function (el) {
-//   if (el.offsetWidth > docWidth) {
-//     console.log(el);
-//   }
-// });
-
-//полученные данные
-const data = JSON.parse(localStorage.getItem('workouts'));
-console.log(JSON.parse(localStorage.getItem('workouts')));
-
-localStorage.setItem(
-  'test',
-  JSON.stringify({ lastName: 'Yore', number: 123213 })
-);
-localStorage.setItem(
-  'test',
-  JSON.stringify({ lastName: 'GTEDS', number: 123213 })
-);
-localStorage.setItem(
-  'test',
-  JSON.stringify({ lastName: 'FDFFD', number: 123213 })
-);
-console.log(JSON.parse(localStorage.getItem('test')));
-
-///Очистка определенных локальных данных
-
+///Clearing specific local data
 function reset() {
-  //удаление локального сохранненого api test
-  localStorage.removeItem('test');
-  ///ПЕРЕзагрузка страницы
+  //Deleting local saved api test
+  localStorage.removeItem('pigGame');
+  //Page reload
   location.reload();
 }
+
+const app = new App();
