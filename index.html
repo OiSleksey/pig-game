@@ -9,7 +9,7 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/normalize.css" />
-    <link rel="stylesheet" href="css/style.min.css" />
+    <!-- <link rel="stylesheet" href="css/style.min.css" /> -->
     <link rel="stylesheet" href="css/style.css" />
     <script defer src="js/script.js"></script>
     <title>Pig game</title>
@@ -90,11 +90,11 @@
   <body>
     <div class="container">
       <div class="wrapper">
-        <main class="pig pig__head">
-          <section class="player player__1 player_active">
+        <main class="wrapper__main main pig pig__head pig__head_active">
+          <section class="main__player player player__1 player_active">
             <h2 class="player__name name" id="name__0">Player 1</h2>
-            <p class="player__score" id="score__0">0</p>
-            <div class="current">
+            <p class="player__score score" id="score__0">0</p>
+            <div class="main__current current">
               <p class="current__label">Current point</p>
               <p class="current__point" id="current__0">0</p>
             </div>
@@ -102,24 +102,30 @@
           <section class="player player__2">
             <h2 class="player__name name" id="name__1">Player 2</h2>
             <p class="player__score" id="score__1">0</p>
-            <div class="current">
+            <div class="main__current current">
               <p class="current__label">Current point</p>
               <p class="current__point" id="current__1">0</p>
             </div>
           </section>
 
-          <img
-            src="img/nose.png"
-            alt="Playing dice"
-            class="dice img-dice__style"
-          />
-          <button class="btn__new btn-style btn-position">New game</button>
+          <img src="img/nose.png" alt="Playing dice" class="main__dice dice" />
+          <button
+            class="main__new-game btn-style btn-position btn-style_animated"
+          >
+            New game
+          </button>
 
-          <button class="btn__roll btn-style btn-position">Roll dice</button>
-          <button class="btn__hold btn-style btn-position">Bank</button>
+          <button
+            class="main__roll-dice btn-style btn-position btn-style_animated"
+          >
+            Roll dice
+          </button>
+          <button class="main__bank btn-style btn-position btn-style_animated">
+            Bank
+          </button>
         </main>
-        <div class="pig__ear-left"></div>
-        <div class="pig__ear-left2"></div>
+        <div class="pig__ear-left pig__ear_active"></div>
+        <div class="pig__ear-left2 pig__ear_active"></div>
         <div class="pig__ear-right"></div>
         <div class="pig__ear-right2"></div>
         <div class="start-game">
@@ -168,24 +174,27 @@
               >
             </div>
             <h3 class="start-game__default-name">
-              If you do not enter a name, then the names will be set to
-              standard: (Player 1 and Player 2)
+              If we don`t enter a name, then the names will be set to standard:
+              (Player 1 and Player 2)
             </h3>
             <button
-              class="start-game__btn-start btn-style start-game__btn-start_animation"
+              class="start-game__btn-start btn-style btn-other_animated"
               type="submit"
             >
               Start game
             </button>
           </form>
-          <button type="submit" class="start-game__btn-rule-game btn-style">
+          <button
+            type="submit"
+            class="start-game__btn-rule-game btn-style btn-other_animated"
+          >
             Rules of the game
           </button>
         </div>
-
         <div class="rule-game display_none" id="test">
           <div
             class="rule-game__close rule-game__close_active icon-close icon-close_active"
+            id="close__rule-game"
           >
             <span></span>
             <span></span>
@@ -238,28 +247,28 @@
                     <img
                       src="img/dice2.png"
                       alt="2"
-                      class="img-dice__style img-dice__style_rules"
+                      class="dice rule-game__dice"
                     />,
                     <img
                       src="img/dice3.png"
                       alt="3"
-                      class="img-dice__style img-dice__style_rules"
+                      class="dice rule-game__dice"
                     />,
                     <img
                       src="img/dice4.png"
                       alt="4"
-                      class="img-dice__style img-dice__style_rules"
+                      class="dice rule-game__dice"
                     />,
                     <img
                       src="img/dice5.png"
                       alt="5"
-                      class="img-dice__style img-dice__style_rules"
+                      class="dice rule-game__dice"
                     />
                     or
                     <img
                       src="img/dice6.png"
                       alt="6"
-                      class="img-dice__style img-dice__style_rules"
+                      class="dice rule-game__dice"
                     />
                     is rolled, the player adds that number of points to their
                     current turn point.
@@ -289,7 +298,7 @@
                     <img
                       src="img/dice1.png"
                       alt="1"
-                      class="img-dice__style img-dice__style_rules"
+                      class="dice rule-game__dice"
                     />, they lose all their current points and their turn ends.
                   </li>
                   <li>
@@ -344,6 +353,7 @@
           <div class="victory__right">
             <div
               class="victory__close victory__close_active icon-close icon-close_active"
+              id="close__victory"
             >
               <span></span>
               <span></span>
@@ -354,8 +364,18 @@
         </div>
         <div class="question">
           <img
-            src="icons/question-mark(1).png"
-            class="question__icon"
+            src="icons/question-mark1.png"
+            class="question__icon icons_animated"
+            alt="question pig"
+          />
+          <img
+            src="icons/book.png"
+            class="question__rules"
+            alt="question pig"
+          />
+          <img
+            src="icons/rename.png"
+            class="question__rename"
             alt="question pig"
           />
         </div>

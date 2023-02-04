@@ -1,0 +1,113 @@
+.btn-style
+    color: $colors-text-btn
+    border: none
+    font-family: inherit
+    font-size: 1.9rem
+    text-transform: uppercase
+    text-decoration: none
+    cursor: pointer
+    font-weight: 400
+    line-height: 3rem
+    text-shadow: $text-shadow-btn
+    transition: all 0.2s
+    background: $background-btn
+    box-shadow: $box-shadow-btn
+    padding: 0.7rem 2.5rem
+    border-radius: 5rem
+    margin: 0 1rem
+    &_animated
+        &:focus
+            outline: none
+        &:hover
+            transform: translateX(-50%) translateY(-4px)
+            box-shadow: $box-shadow-btn
+            &::after
+                opacity: 0
+                transform: scaleX(1.5) scaleY(1.7)
+        &:active
+            transform: translateX(-50%) translateY(0)
+            box-shadow: $box-shadow-btn
+        &::after
+            content: ""
+            background: $background-btn
+            width: 100%
+            height: 100%
+            border-radius: 5rem
+            display: inline-block
+            position: absolute
+            top: 0
+            left: 0
+            z-index: -1
+            transition: all .4s
+        // &:active
+        //     transform: translate(-50%, 3px)
+
+.btn-other_animated
+    position: relative
+    &:focus
+        outline: none
+    &:hover
+        transform: translateY(-4px)
+        box-shadow: $box-shadow-btn
+        &::after
+            opacity: 0
+            transform: scaleX(1.2) scaleY(1.5)
+    &:active
+        transform: translateY(0)
+        box-shadow: $box-shadow-btn
+    &::after
+        content: ""
+        background: $background-btn
+        width: 100%
+        height: 100%
+        border-radius: 5rem
+        display: inline-block
+        position: absolute
+        top: 0
+        left: 0
+        z-index: -1
+        transition: all .4s
+
+//Кнопка из спанов крестик
+.icon-close
+    padding: 0.2rem 0.1rem
+    // border: 0.3rem solid transpared
+    border-radius: 0
+    width: 4rem
+    height: 4rem
+    text-align: center
+    overflow: hidden
+    cursor: pointer
+    filter: $drop-shadw-icon-close
+    transition: all 0.3s
+    backface-visibility: hidden
+    // outline: 0.1px solid blue
+    &:hover
+        transform: scale(1.15)
+    &:active
+        background: #7a4a65fb
+        transform: scale(0.95) translateY(10px)
+    & span
+        filter: $drop-shadw-icon-close
+        transition: 1s all
+        width: 90%
+        height: .4rem
+        display: block
+        background: #FF5ACD
+        // & span:nth-child(1)
+        & span:nth-child(2)
+            opacity: 1
+        // & span:nth-child(3)
+    &_active
+        border: 0.3rem solid #FF5ACD
+        padding: 0.1rem
+        border-radius: 20rem
+        transform:
+        // transform: scale(0.95) translateY(-10px)
+        // &__span
+        & span:nth-child(1)
+            transform: translateY(1.4rem) translateX(.175rem) rotate(45deg)
+        & span:nth-child(2)
+            opacity: 0
+        & span:nth-child(3)
+            transform: translateY(-1.1rem) translateX(.175rem)rotate(-45deg)
