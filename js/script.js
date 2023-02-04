@@ -296,18 +296,14 @@ class App {
     document.getElementById(
       `score__${+!this.#dataGame.activePlayer}`
     ).textContent = this.#dataGame.totalScores[+!this.#dataGame.activePlayer];
+
+    this.cleanFacePig();
     if (this.#dataGame.activePlayer === 0) {
       player1Element.classList.add('player_active');
-      player2Element.classList.remove('player_active');
       pigEarLeft1.classList.add('pig__ear_active');
       pigEarLeft2.classList.add('pig__ear_active');
-      pigEarRight1.classList.remove('pig__ear_active');
-      pigEarRight2.classList.remove('pig__ear_active');
     } else {
-      player1Element.classList.remove('player_active');
       player2Element.classList.add('player_active');
-      pigEarLeft1.classList.remove('pig__ear_active');
-      pigEarLeft2.classList.remove('pig__ear_active');
       pigEarRight1.classList.add('pig__ear_active');
       pigEarRight2.classList.add('pig__ear_active');
     }
@@ -358,6 +354,10 @@ class App {
     score2Element.textContent = 0;
     current1Element.textContent = 0;
     current2Element.textContent = 0;
+    playerWrapper.forEach(item => {
+      item.removeAttribute('style');
+    });
+    pigFace.classList.remove('pig__head_active');
     player1Element.classList.remove('player_winner');
     player2Element.classList.remove('player_winner');
     this.cleanFacePig();
@@ -371,9 +371,6 @@ class App {
     });
     diceElement.src = this.#dataGame.imgDiceSrcDefault;
     this.setLocaleStorage();
-    playerWrapper.forEach(item => {
-      item.style.filter = 'blur(1.8px)';
-    });
   }
 
   //Switching players
@@ -546,6 +543,12 @@ class App {
     score2Element.textContent = 0;
     current1Element.textContent = 0;
     current2Element.textContent = 0;
+    this.cleanFacePig();
+    this.fillingEar();
+    pigFace.classList.add('pig__head_active');
+    playerWrapper.forEach(item => {
+      item.style.filter = 'blur(0)';
+    });
     this.setLocaleStorage();
   }
 
@@ -569,15 +572,11 @@ class App {
   victory() {
     this.#dataGame.isModalVictory = true;
     this.#dataGame.isPlaying = false;
-    this.cleanFacePig();
-    this.fillingEar();
-    pigFace.classList.add('pig__head_active');
-    playerWrapper.forEach(item => {
-      item.style.filter = 'blur(0)';
-    });
+    this.hiddenBtnName();
+
     diceElement.src = this.#dataGame.imgDiceSrcDefault;
     modalWindowVictory.classList.remove('display_none');
-    this.hiddenBtnName();
+
     if (this.#dataGame.nameVictory) {
       nameVictory.textContent = this.#dataGame.nameVictory;
     } else {
