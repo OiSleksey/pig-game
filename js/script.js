@@ -37,6 +37,7 @@ const pigEarRight2 = document.querySelector('.pig__ear-right2');
 
 const crossRuleGame = document.querySelector('#close__rule-game');
 const crossVictory = document.querySelector('#close__victory');
+const tonguePig = document.querySelector('.main__block-tongue');
 let crossRename;
 let btnRename;
 
@@ -370,6 +371,7 @@ class App {
       name.classList.remove('hidden');
     });
     diceElement.src = this.#dataGame.imgDiceSrcDefault;
+    tonguePig.classList.remove('display_block');
     this.setLocaleStorage();
   }
 
@@ -549,6 +551,7 @@ class App {
     playerWrapper.forEach(item => {
       item.style.filter = 'blur(0)';
     });
+    tonguePig.classList.add('display_block');
     this.setLocaleStorage();
   }
 
